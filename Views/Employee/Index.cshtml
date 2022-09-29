@@ -1,0 +1,39 @@
+﻿@model EmployeeManagementSystem.Models.IndexViewModel
+
+@*Another way to get list of employees:*@
+@*@model IEnumerable<EmployeeManagementSystem.Models.Employee>*@
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @*display Id as column heading*@
+                @Html.DisplayNameFor(model=>model.Employees.First().Id)
+            </th>
+            <th>
+                @*display Name as column heading*@
+                @Html.DisplayNameFor(model=>model.Employees.First().Name)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Employees) {
+        <tr>
+            <td>@Html.DisplayFor(modelitem=>item.Id)</td>
+            <td>@Html.DisplayFor(modelitem=>item.Name)</td>
+            <td>
+                <a asp-action="Details" asp-controller="Employee" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

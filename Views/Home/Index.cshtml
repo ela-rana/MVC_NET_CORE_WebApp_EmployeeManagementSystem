@@ -1,0 +1,11 @@
+﻿@inject EmployeeManagementSystem.Services.IFormatNumber formatNumber
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Employee Management System</p>
+</div>
+
+@await Html.PartialAsync("_AboutCompany")

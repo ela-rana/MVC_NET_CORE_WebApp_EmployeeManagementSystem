@@ -1,0 +1,8 @@
+﻿@inject EmployeeManagementSystem.Services.IFormatNumber formatNumber
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<p>
+    This is a multinational company.
+    <br />There are @formatNumber.FormatNumber(345568) employees in this company.
+</p>

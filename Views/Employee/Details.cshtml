@@ -1,0 +1,75 @@
+﻿@model EmployeeManagementSystem.Models.Employee
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Salary)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Department)
+        </dd>
+    </dl>
+    <div style="padding:10px">
+        @if(Model.ImageName!="")
+        {
+            <img src="~/images/@Model.ImageName" height="200"/>
+        }
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@*HTML HELPERS*@
+@*evrything above that starts with @Html. are html helpers. *@
+@*Example of ActionLink Html helper below:*@
+@Html.ActionLink("Test link","Index","Home") 
+@*when you click the link "Test link", it will take you to action index in controller home*@
+
+@*TAG HELPERS*@
+@*Example of Tag helper below:*@
+<a asp-controller="Home" asp-action="Privacy">Go to Privacy</a>
+@*
+    In order to be able to use tag helpers throughout our project it has to be added
+    MVC automatically adds it in _ViewImports.cshtml in the statement:
+    @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+*@
