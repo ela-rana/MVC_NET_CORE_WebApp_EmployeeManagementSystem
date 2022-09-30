@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<ICRUD,CRUD>();    //to register employee CRUD actions service
 builder.Services.AddSingleton<IFormatNumber, FormatClass>();    //to register FormatNumber service
+builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

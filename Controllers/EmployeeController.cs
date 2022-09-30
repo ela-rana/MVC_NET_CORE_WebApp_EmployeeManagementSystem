@@ -7,10 +7,12 @@ namespace EmployeeManagementSystem.Controllers
     public class EmployeeController : Controller
     {
         private ICRUD crud;
+        private IFileUploadService fileUploadService;
 
-        public EmployeeController(ICRUD crud) //service injection aka dependency injection
+        public EmployeeController(ICRUD crud, IFileUploadService fileUploadService) //service injection aka dependency injection
         {
             this.crud = crud; //to get reference of CRUD class
+            this.fileUploadService = fileUploadService;
         }
         public IActionResult Index()
         {
@@ -36,11 +38,21 @@ namespace EmployeeManagementSystem.Controllers
         }
 
         [HttpPost] //we have to specify that it is a Post type otherwise by default it is Get
-        public IActionResult Create(Employee obj) //Here we method overload to create its post type 
+        public async Task<ActionResult> Create(Employee obj,IFormFile file) //Here we method overload to create its post type 
+        //in the above statement you can type ActionResult or IActionResult (both are interchageable here)
         {
             if (ModelState.IsValid)
             {
                 crud.AddRecord(obj);
+                if(await fileUploadService.UploadFile(file))
+                {
+                    obj.ImageName = fileUploadService.FileName;
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = "File upload failed";
+                    return View(obj);
+                }
                 ViewBag.Message = "Employee added successfully";
             }
             return View(obj); //to stay on this screen after employee created
