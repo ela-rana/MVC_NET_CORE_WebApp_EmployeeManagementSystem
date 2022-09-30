@@ -30,10 +30,16 @@
         <tr>
             <td>@Html.DisplayFor(modelitem=>item.Id)</td>
             <td>@Html.DisplayFor(modelitem=>item.Name)</td>
-            <td>
-                <a asp-action="Details" asp-controller="Employee" asp-route-id="@item.Id">Details</a>
-            </td>
-        </tr>
+                <td>
+                    <a asp-action="Details" asp-controller="Employee" asp-route-id="@item.Id">Details</a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Employee" asp-route-id="@item.Id">Edit</a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-controller="Employee" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
 }
     </tbody>
 </table>

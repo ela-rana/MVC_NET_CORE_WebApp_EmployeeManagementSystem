@@ -1,6 +1,4 @@
-﻿using Microsoft.Build.Framework;
-using System.ComponentModel.DataAnnotations;
-using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EmployeeManagementSystem.Models
 {
@@ -21,9 +19,10 @@ namespace EmployeeManagementSystem.Models
         [Required(ErrorMessage = "ID is a required field")]
         public int Id { get; set; }
 
-        [Display(Name = "Employee Full Name")]
+        [Display(Name = "Employee First Name")]
         [Required(ErrorMessage = "Name is a required field")]
         [MaxLength(100, ErrorMessage ="Name too long, can be upto 100 characters max")]
+        [AllLetters(ErrorMessage ="Please enter letters only, no commas, dots, spaces allowed")]
         public string? Name { get; set; }
 
         [Range(18,100,ErrorMessage="Age must be between 18-100")]
