@@ -34,7 +34,9 @@ namespace EmployeeManagementSystem.Controllers
         /// </summary>
         public IActionResult Create() //By default methods are Get type 
         {
-            return View();
+            Employee emp = new Employee();
+            emp.Id = crud.MaxID() + 1;
+            return View(emp);
         }
 
         [HttpPost] //we have to specify that it is a Post type otherwise by default it is Get
@@ -43,7 +45,6 @@ namespace EmployeeManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                crud.AddRecord(obj);
                 if(await fileUploadService.UploadFile(file))
                 {
                     obj.ImageName = fileUploadService.FileName;
@@ -52,9 +53,12 @@ namespace EmployeeManagementSystem.Controllers
                 {
                     ViewBag.ErrorMessage = "File upload failed";
                     return View(obj);
-                }
+                }                
+                crud.AddRecord(obj);
                 ViewBag.Message = "Employee added successfully";
+                return RedirectToAction("Create");
             }
+            ViewBag.ErrorMessage = "Please ensure all fields are filled correctly and image is attached";
             return View(obj); //to stay on this screen after employee created
             
             //to go back to list after record created you can return the following instead

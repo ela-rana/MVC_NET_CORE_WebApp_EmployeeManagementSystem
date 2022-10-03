@@ -7,9 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton<ICRUD, CRUD>();    //to register employee CRUD actions service
+//builder.Services.AddSingleton<ICRUD, CRUD>();    //to register employee CRUD actions service
 builder.Services.AddScoped<ICRUD, DBCRUDRepository>();    //to register DB connecting entity core
-builder.Services.AddDbContext<EmployeeContext>(options=>options.UseSqlite("Data Source= EmployeesDB.db"));
+//builder.Services.AddDbContext<EmployeeContext>(options => options.UseSqlite(
+//    "Data Source= EmployeesDB.db"));
+builder.Services.AddDbContext<EmployeeContext>(options => options.UseSqlServer(
+    "Server=ELAPC;Database=EMS;Trusted_Connection=true;MultipleActiveResultSets=True"));
 builder.Services.AddSingleton<IFormatNumber, FormatClass>();    //to register FormatNumber service
 builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 var app = builder.Build();

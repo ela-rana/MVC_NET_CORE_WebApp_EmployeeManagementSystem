@@ -31,7 +31,8 @@ namespace EmployeeManagementSystem.Models
                 new Employee() { Id = 101, DeptId=1, Age = 33, Address = "CA", Department = Dept.HumanResources, Name = "Elena", ImageName = "elena.jpg", Salary = 5000 },
                 new Employee() { Id = 102, DeptId=3, Age = 45, Address = "MO", Department = Dept.InformationTechnology, Name = "Logan", ImageName = "logan.jpg", Salary = 4000 },
                 new Employee() { Id = 103, DeptId=2, Age = 42, Address = "MS", Department = Dept.Finance, Name = "Michael", ImageName = "michael.jpg", Salary = 5000 },
-                new Employee() { Id = 104, DeptId=4, Age = 23, Address = "AL", Department = Dept.Marketing, Name = "Nathan", ImageName = "nathan.jpg", Salary = 3000 }
+                new Employee() { Id = 104, DeptId = 4, Age = 23, Address = "Huntsville, AL", Department = Dept.Marketing, Name = "Nathan", ImageName = "nathan.jpg", Salary = 3000 },
+                new Employee() { Id = 105, DeptId = 5, Age = 25, Address = "Columbus, OH", Department = Dept.Operations, Name = "NathanielJamieson", ImageName = "nathan.jpg", Salary = 3000 }
                 );
         }
     }
