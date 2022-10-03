@@ -1,11 +1,15 @@
+using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSingleton<ICRUD,CRUD>();    //to register employee CRUD actions service
+builder.Services.AddSingleton<ICRUD, CRUD>();    //to register employee CRUD actions service
+builder.Services.AddScoped<ICRUD, DBCRUDRepository>();    //to register DB connecting entity core
+builder.Services.AddDbContext<EmployeeContext>(options=>options.UseSqlite("Data Source= EmployeesDB.db"));
 builder.Services.AddSingleton<IFormatNumber, FormatClass>();    //to register FormatNumber service
 builder.Services.AddScoped<IFileUploadService, FileUploadService>();
 var app = builder.Build();
@@ -15,6 +19,14 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
+
+using(var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<EmployeeContext>();
+    dbContext.Database.EnsureCreated(); //creates the database if it doesn't already exist
+    //use context
+}
+
 app.UseStaticFiles();
 
 app.UseRouting();

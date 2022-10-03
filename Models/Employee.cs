@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EmployeeManagementSystem.Models
 {
@@ -9,15 +10,17 @@ namespace EmployeeManagementSystem.Models
         Finance,
         InformationTechnology,
         Marketing,
-        Operations,
-        Logistics,
-        Executive
+        Operations
     }
     public class Employee
     {
         [Display(Name="Employee ID")]
         [Required(ErrorMessage = "ID is a required field")]
-        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; } //when your column name is Id, entity framework core automatically
+                 //identifies it as primary key, so you don't have to specify this as primary key
+
+        public int DeptId { get; set; } //foreign key
 
         [Display(Name = "Employee First Name")]
         [Required(ErrorMessage = "Name is a required field")]
